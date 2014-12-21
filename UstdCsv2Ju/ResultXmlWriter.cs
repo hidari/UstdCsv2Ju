@@ -22,6 +22,7 @@ namespace Hidari0415.UstdCsv2Ju
 
 		internal void WriteResultFile()
 		{
+			// TODO: UstdCsvクラスに処理を移動する
 			// CSVファイルを読み込んでレコードをMetricRecordのリストとして保持する
 			List<MetricRecord> records;
 
@@ -30,6 +31,7 @@ namespace Hidari0415.UstdCsv2Ju
 				records = reader.GetRecords<MetricRecord>().ToList();
 			}
 
+			// TODO: メソッドを切り出すか、別のクラスに移動する
 			// 読み込んだレコードをXMLの元になるJUnitStyleTestCaseに詰め込む
 			var result = new List<JUnitStyleTestCase>();
 
@@ -58,6 +60,7 @@ namespace Hidari0415.UstdCsv2Ju
 				result.Add(testCase);
 			}
 
+			// TODO: メソッドに切り分けるほうが良さそう
 			// XmlDocumentを構築
 			var xmlDocument = new XmlDocument();
 			var testSuite = xmlDocument.CreateElement("testsuite");
