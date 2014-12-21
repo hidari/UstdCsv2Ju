@@ -22,6 +22,7 @@ namespace Hidari0415.UstdCsv2Ju
 
 		internal void WriteResultFile()
 		{
+			// CSVファイルを読み込んでレコードをMetricRecordのリストとして保持する
 			List<MetricRecord> records;
 
 			using (var reader = new CsvReader(new StreamReader(InputCsv, Encoding.Default)))
@@ -29,6 +30,7 @@ namespace Hidari0415.UstdCsv2Ju
 				records = reader.GetRecords<MetricRecord>().ToList();
 			}
 
+			// 読み込んだレコードをXMLの元になるJUnitStyleTestCaseに詰め込む
 			var result = new List<JUnitStyleTestCase>();
 
 			foreach (var metricRecord in records)
@@ -56,6 +58,7 @@ namespace Hidari0415.UstdCsv2Ju
 				result.Add(testCase);
 			}
 
+			// XmlDocumentを構築
 			var xmlDocument = new XmlDocument();
 			var testSuite = xmlDocument.CreateElement("testsuite");
 			xmlDocument.AppendChild(testSuite);
@@ -78,6 +81,7 @@ namespace Hidari0415.UstdCsv2Ju
 				testSuite.AppendChild(testCase);
 			}
 
+			// 構築したXmlDocumentをファイルに書き出す
 			xmlDocument.Save(OutputXml);
 		}
 	}
