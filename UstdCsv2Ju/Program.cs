@@ -14,28 +14,28 @@ namespace Hidari0415.UstdCsv2Ju
 
 			// Thank you for http://neue.cc/2009/12/13_229.html
 			var key = string.Empty;
-			var result = args
+			var argsDict = args
 				.GroupBy(s => options.Contains(s) ? key = s : key)
 				.ToDictionary(g => g.Key, g => g.Skip(1).FirstOrDefault());
 
 			// Is "--help" argument contained?
-			if (result.ContainsKey("--help"))
+			if (argsDict.ContainsKey("--help"))
 			{
 				ShowHelp();
 				return 0;
 			}
 
 			// Are Required arguments contained?
-			if (!result.ContainsKey("--input-csv") ||
-				!result.ContainsKey("--threshold") || 
-				!result.ContainsKey("--output-xml"))
+			if (!argsDict.ContainsKey("--input-csv") ||
+				!argsDict.ContainsKey("--threshold") || 
+				!argsDict.ContainsKey("--output-xml"))
 			{
 				ShowHelp();
 				return 0;
 			}
 
 			// Validate arguments.
-			var inputCsv = result["--input-csv"];
+			var inputCsv = argsDict["--input-csv"];
 			if (!File.Exists(inputCsv))
 			{
 				Console.WriteLine("{0} is not found.", inputCsv);
@@ -43,13 +43,13 @@ namespace Hidari0415.UstdCsv2Ju
 			}
 
 			int threshold;
-			if (!int.TryParse(result["--threshold"], out threshold))
+			if (!int.TryParse(argsDict["--threshold"], out threshold))
 			{
 				Console.WriteLine("Threshold must be string that represent 32-bit signed integer.");
 				return 0;
 			}
 
-			var outputXml = result["--output-xml"];
+			var outputXml = argsDict["--output-xml"];
 
 			// Execute
 			var resultWriter = new ResultXmlWriter(inputCsv, threshold, outputXml);
