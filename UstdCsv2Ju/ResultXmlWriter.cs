@@ -24,12 +24,7 @@ namespace Hidari0415.UstdCsv2Ju
 		{
 			// TODO: UstdCsvクラスに処理を移動する
 			// CSVファイルを読み込んでレコードをMetricRecordのリストとして保持する
-			List<MetricRecord> records;
-
-			using (var reader = new CsvReader(new StreamReader(InputCsv, Encoding.Default)))
-			{
-				records = reader.GetRecords<MetricRecord>().ToList();
-			}
+			var records = UstdCsvReader.ReadMetricRecords(InputCsv);
 
 			// TODO: メソッドを切り出すか、別のクラスに移動する
 			// 読み込んだレコードをXMLの元になるJUnitStyleTestCaseに詰め込む
