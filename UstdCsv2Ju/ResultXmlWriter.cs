@@ -1,9 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Xml;
-using CsvHelper;
 
 namespace Hidari0415.UstdCsv2Ju
 {
