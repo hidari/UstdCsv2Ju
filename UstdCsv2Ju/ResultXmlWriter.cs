@@ -37,7 +37,7 @@ namespace Hidari0415.UstdCsv2Ju
 				if (metricRecord.Value > Threshold)
 				{
 					testCase.FailureElement = new JUnitStyleFailureElement(
-						"Over threshold.",
+						"Over threshold.",	//TODO: TypeにはKindを入れるほうがいいか？
 						"Value is " + (metricRecord.Value - Threshold) + " over."
 					);
 					testCase.IsFailed = true;

@@ -9,6 +9,7 @@ namespace Hidari0415.UstdCsv2Ju
 	{
 		static int Main(string[] args)
 		{
+			//TODO: 引数に --version を加えて使用ライブラリを表示する
 			var options = new HashSet<string> { "--input-csv", "--threshold", "--output-xml", "--help" };
 
 			// Thank you for http://neue.cc/2009/12/13_229.html
