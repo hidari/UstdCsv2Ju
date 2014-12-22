@@ -7,8 +7,13 @@ using CsvHelper.Configuration;
 
 namespace Hidari0415.UstdCsv2Ju
 {
-	internal class UstdCsvReader
+	internal static class UstdCsvReader
 	{
+		/// <summary>
+		/// Read Metric data from CSV file.
+		/// </summary>
+		/// <param name="path">a CSV file path</param>
+		/// <returns>All data that read from CSV file</returns>
 		public static List<MetricRecord> ReadMetricRecords(string path)
 		{
 			List<MetricRecord> records;
