@@ -22,7 +22,6 @@ namespace Hidari0415.UstdCsv2Ju
 
 		internal void WriteResultFile()
 		{
-			// TODO: UstdCsvクラスに処理を移動する
 			// CSVファイルを読み込んでレコードをMetricRecordのリストとして保持する
 			var records = UstdCsvReader.ReadMetricRecords(InputCsv);
 
