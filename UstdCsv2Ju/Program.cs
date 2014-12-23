@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace Hidari0415.UstdCsv2Ju
 {
 	class Program
 	{
+		private static readonly ProductInfo productInfo = new ProductInfo();
+
 		static int Main(string[] args)
 		{
-			//TODO: 引数に --version を加えて使用ライブラリを表示する
 			var options = new HashSet<string> { "--input-csv", "--threshold", "--output-xml", "--help", "--version" };
 
 			// Thank you for http://neue.cc/2009/12/13_229.html
@@ -26,7 +28,7 @@ namespace Hidari0415.UstdCsv2Ju
 			}
 
 			// Is "--version" argument contained?
-			if (argsDict.ContainsKey("--varsion"))
+			if (argsDict.ContainsKey("--version"))
 			{
 				ShowVersion();
 				return 0;
@@ -67,12 +69,25 @@ namespace Hidari0415.UstdCsv2Ju
 
 		private static void ShowVersion()
 		{
-			Console.WriteLine(@"
-<<About UstdCsvReader>> 
+			Console.WriteLine(@" 
+{0}
+Version: {1}
+{2}
 
-Version: 0.1
+Libraries:
+{3}
+", productInfo.Title, productInfo.VersionString, productInfo.Copyright, GetExternalLibraries());
+		}
 
-");
+		private static string GetExternalLibraries()
+		{
+			var libraries = new StringBuilder();
+			foreach (var library in productInfo.Libraries)
+			{
+				libraries.Append(string.Format("  {0}({1})\r\n", library.Name, library.Uri));
+			}
+
+			return libraries.ToString();
 		}
 
 		/// <summary>
@@ -90,6 +105,10 @@ UstdCsv2Ju.exe --input-csv <CSV_FILE> --threshold <NUMBER> --output-xml <XML_FIL
 UstdCsv2Ju.exe --help
 
   Show this message. If you set invalid argument, this program shows this message too.
+
+UstdCsv2Ju.exe --version
+
+  Show message about UstdCsv2Ju.
 ");
 		}
 	}
