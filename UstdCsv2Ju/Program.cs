@@ -10,7 +10,7 @@ namespace Hidari0415.UstdCsv2Ju
 		static int Main(string[] args)
 		{
 			//TODO: 引数に --version を加えて使用ライブラリを表示する
-			var options = new HashSet<string> { "--input-csv", "--threshold", "--output-xml", "--help" };
+			var options = new HashSet<string> { "--input-csv", "--threshold", "--output-xml", "--help", "--version" };
 
 			// Thank you for http://neue.cc/2009/12/13_229.html
 			var key = string.Empty;
@@ -22,6 +22,13 @@ namespace Hidari0415.UstdCsv2Ju
 			if (argsDict.ContainsKey("--help"))
 			{
 				ShowHelp();
+				return 0;
+			}
+
+			// Is "--version" argument contained?
+			if (argsDict.ContainsKey("--varsion"))
+			{
+				ShowVersion();
 				return 0;
 			}
 
@@ -56,6 +63,16 @@ namespace Hidari0415.UstdCsv2Ju
 			resultWriter.WriteResultFile();
 
 			return 0;
+		}
+
+		private static void ShowVersion()
+		{
+			Console.WriteLine(@"
+<<About UstdCsvReader>> 
+
+Version: 0.1
+
+");
 		}
 
 		/// <summary>
