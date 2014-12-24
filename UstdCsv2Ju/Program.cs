@@ -61,17 +61,9 @@ namespace Hidari0415.UstdCsv2Ju
 			var outputXml = argsDict["--output-xml"];
 
 			// powershellで -NoTypeInformation を付けずに出力されたCSVの一行目を除去し一時ファイルを作る。
-			string firstLine;
-			using (var reader = new StreamReader(inputCsv, Encoding.Default))
+			if (IsExistTypeInfo(inputCsv))
 			{
-				firstLine = reader.ReadLine();
-			}
-
-			if (firstLine != null && firstLine.Contains("#TYPE"))
-			{
-				var tmpCsv = File.ReadLines(inputCsv).Skip(1);
-				File.WriteAllLines(inputCsv + ".tmp", tmpCsv);
-				inputCsv = inputCsv + ".tmp";
+				inputCsv = CreateTemporaryFile(inputCsv);
 				_isExistDummy = true;
 			}
 
@@ -86,6 +78,24 @@ namespace Hidari0415.UstdCsv2Ju
 			}
 
 			return 0;
+		}
+
+		private static string CreateTemporaryFile(string path)
+		{
+			var tmpCsv = File.ReadLines(path).Skip(1);
+			File.WriteAllLines(path + ".tmp", tmpCsv);
+			return path + ".tmp";
+		}
+
+		private static bool IsExistTypeInfo(string path)
+		{
+			string firstLine;
+			using (var reader = new StreamReader(path, Encoding.Default))
+			{
+				firstLine = reader.ReadLine();
+			}
+
+			return firstLine != null && firstLine.Contains("#TYPE");
 		}
 
 		private static void ShowVersion()
