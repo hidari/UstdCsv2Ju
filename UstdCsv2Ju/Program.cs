@@ -9,7 +9,7 @@ namespace Hidari0415.UstdCsv2Ju
 	class Program
 	{
 		private static readonly ProductInfo productInfo = new ProductInfo();
-
+		private static bool _isExistDummy = false;
 		static int Main(string[] args)
 		{
 			var options = new HashSet<string> { "--input-csv", "--threshold", "--output-xml", "--help", "--version" };
@@ -60,9 +60,29 @@ namespace Hidari0415.UstdCsv2Ju
 
 			var outputXml = argsDict["--output-xml"];
 
+			// powershellで -NoTypeInformation を付けずに出力されたCSVの一行目を除去し一時ファイルを作る。
+			string firstLine;
+			using (var reader = new StreamReader(inputCsv, Encoding.Default))
+			{
+				firstLine = reader.ReadLine();
+			}
+
+			if (firstLine != null && firstLine.Contains("#TYPE"))
+			{
+				var tmpCsv = File.ReadLines(inputCsv).Skip(1);
+				File.WriteAllLines(inputCsv + ".tmp", tmpCsv);
+				inputCsv = inputCsv + ".tmp";
+				_isExistDummy = true;
+			}
+
 			// Execute
 			var resultWriter = new ResultXmlWriter(inputCsv, threshold, outputXml);
 			resultWriter.WriteResultFile();
+
+			if (_isExistDummy)
+			{
+				File.Delete(inputCsv);
+			}
 
 			return 0;
 		}
