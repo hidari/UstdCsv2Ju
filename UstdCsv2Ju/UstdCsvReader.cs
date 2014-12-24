@@ -18,6 +18,7 @@ namespace Hidari0415.UstdCsv2Ju
 		{
 			List<MetricRecord> records;
 
+			// TODO: ここで読み込みに失敗した場合のハンドリングを追加する
 			using (var reader = new CsvReader(new StreamReader(path, Encoding.Default)))
 			{
 				reader.Configuration.RegisterClassMap<MetricRecordMap>();
@@ -26,7 +27,6 @@ namespace Hidari0415.UstdCsv2Ju
 
 			return records;
 		}
-
 	}
 
 	internal sealed class MetricRecordMap : CsvClassMap<MetricRecord>
