@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
 
 namespace Hidari0415.UstdCsv2Ju
@@ -21,34 +22,8 @@ namespace Hidari0415.UstdCsv2Ju
 			// CSVファイルを読み込んでレコードをMetricRecordのリストとして保持する
 			var records = UstdCsvReader.ReadMetricRecords(InputCsv);
 
-			// TODO: メソッドを切り出すか、別のクラスに移動する
 			// 読み込んだレコードをXMLの元になるJUnitStyleTestCaseに詰め込む
-			var result = new List<JUnitStyleTestCase>();
-
-			foreach (var metricRecord in records)
-			{
-				var testCase = new JUnitStyleTestCase()
-				{
-					ClassName = metricRecord.File.Replace('.', '_').Replace('\\', '.'),
-					Name = metricRecord.Name,
-					Time = "0.00"
-				};
-
-				if (metricRecord.Value > Threshold)
-				{
-					testCase.FailureElement = new JUnitStyleFailureElement(
-						"Over threshold.",	//TODO: TypeにはKindを入れるほうがいいか？
-						"Value is " + (metricRecord.Value - Threshold) + " over."
-					);
-					testCase.IsFailed = true;
-				}
-				else
-				{
-					testCase.FailureElement = new JUnitStyleFailureElement();
-				}
-
-				result.Add(testCase);
-			}
+			var result = records.Select(CreateTestCase).ToList();
 
 			// TODO: メソッドに切り分けるほうが良さそう
 			// XmlDocumentを構築
@@ -76,6 +51,33 @@ namespace Hidari0415.UstdCsv2Ju
 
 			// 構築したXmlDocumentをファイルに書き出す
 			xmlDocument.Save(OutputXml);
+		}
+
+		private JUnitStyleTestCase CreateTestCase(MetricRecord metricRecord)
+		{
+			var testCase = new JUnitStyleTestCase()
+			{
+				ClassName = metricRecord.File.Replace('.', '_').Replace('\\', '.'),
+				Name = metricRecord.Name,
+				Time = "0.00"
+			};
+
+			// Failureを判定
+			if (metricRecord.Value > Threshold)
+			{
+				testCase.FailureElement = new JUnitStyleFailureElement(
+					"Over threshold.",	//TODO: TypeにはKindを入れるほうがいいか？
+					"Value is " + (metricRecord.Value - Threshold) + " over."
+				);
+
+				testCase.IsFailed = true;
+			}
+			else
+			{
+				testCase.FailureElement = new JUnitStyleFailureElement();
+			}
+
+			return testCase;
 		}
 	}
 }
