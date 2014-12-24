@@ -9,7 +9,7 @@ namespace Hidari0415.UstdCsv2Ju
 	class Program
 	{
 		private static readonly ProductInfo productInfo = new ProductInfo();
-		private static bool _isExistDummy = false;
+		private static bool _isExistDummy;
 		static int Main(string[] args)
 		{
 			var options = new HashSet<string> { "--input-csv", "--threshold", "--output-xml", "--help", "--version" };
@@ -79,6 +79,7 @@ namespace Hidari0415.UstdCsv2Ju
 			var resultWriter = new ResultXmlWriter(inputCsv, threshold, outputXml);
 			resultWriter.WriteResultFile();
 
+			// delete temp file if exists.
 			if (_isExistDummy)
 			{
 				File.Delete(inputCsv);
