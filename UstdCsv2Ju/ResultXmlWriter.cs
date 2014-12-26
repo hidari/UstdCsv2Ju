@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Xml;
 
 namespace Hidari0415.UstdCsv2Ju
@@ -66,8 +65,10 @@ namespace Hidari0415.UstdCsv2Ju
 			if (metricRecord.Value > Threshold)
 			{
 				testCase.FailureElement = new JUnitStyleFailureElement(
-					"Over threshold.",	//TODO: TypeにはKindを入れるほうがいいか？
-					"Value is " + (metricRecord.Value - Threshold) + " over."
+					string.Format("Threshold is {0}.", Threshold),
+					string.Format(@"Threshold: {0}
+Actual:{1}
+Over: {2}", Threshold, metricRecord.Value, (metricRecord.Value - Threshold))
 				);
 
 				testCase.IsFailed = true;
