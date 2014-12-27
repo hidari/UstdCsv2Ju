@@ -66,7 +66,8 @@ namespace Hidari0415.UstdCsv2Ju
 			{
 				testCase.FailureElement = new JUnitStyleFailureElement(
 					"OverThresholdException",
-					CreateErrorDetailMessage(metricRecord));
+					CreateErrorDetailMessage(metricRecord)
+				);
 
 				testCase.IsFailed = true;
 			}
@@ -80,9 +81,16 @@ namespace Hidari0415.UstdCsv2Ju
 
 		private string CreateErrorDetailMessage(MetricRecord metricRecord)
 		{
-			return string.Format(@"Threshold: {0}
+			const string messageFormat = @"Threshold: {0}
 Actual:{1}
-Over: {2}", Threshold, metricRecord.Value, (metricRecord.Value - Threshold));
+Over: {2}";
+
+			return string.Format(
+				messageFormat,
+				Threshold,
+				metricRecord.Value,
+				(metricRecord.Value - Threshold)
+			);
 		}
 	}
 }
