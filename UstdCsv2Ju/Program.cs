@@ -103,6 +103,9 @@ namespace Hidari0415.UstdCsv2Ju
 			Console.WriteLine(@" 
 {0}
 Version: {1}
+Project Home: https://github.com/hidari/UstdCsv2Ju
+
+{0} is OSS released under The MIT License.
 {2}
 
 Libraries:
