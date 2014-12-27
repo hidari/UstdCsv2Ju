@@ -2,7 +2,6 @@
 {
 	internal class MetricRecord
 	{
-		//TODO: たぶんこのKindは必要ない。CSVHelperのConfigurationにIndex指定して読み込むのが良さそう
 		public string Kind { get; set; }
 		public string Name { get; set; }
 		public string File { get; set; }
