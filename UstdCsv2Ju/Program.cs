@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,32 @@ namespace Hidari0415.UstdCsv2Ju
 {
 	class Program
 	{
+		static Program()
+		{
+			AppDomain.CurrentDomain.UnhandledException +=
+				(sender, args) => ReportException(sender, args.ExceptionObject as Exception);
+		}
+
+		private static void ReportException(object sender, Exception exception)
+		{
+			const string messageFormat = @"
+===========================================================
+ERROR, date = {0}, sender = {1},
+{2}
+";
+			const string path = "error.log";
+			try
+			{
+				var message = string.Format(messageFormat, DateTimeOffset.Now, sender, exception);
+				Debug.WriteLine(message);
+				File.AppendAllText(path, message);
+			}
+			catch (Exception ex)
+			{				
+				Debug.WriteLine(ex);
+			}
+		}
+
 		private static readonly ProductInfo productInfo = new ProductInfo();
 		private static bool _isExistDummy;
 		static int Main(string[] args)
