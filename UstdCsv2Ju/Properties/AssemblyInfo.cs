@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("hidari-lab.net")]
 [assembly: AssemblyProduct("UstdCsv2Ju")]
-[assembly: AssemblyCopyright("Copyright © 2014 Hidari0415")]
+[assembly: AssemblyCopyright("Copyright Hidari0415 2014.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
