@@ -15,28 +15,9 @@ namespace Hidari0415.UstdCsv2Ju
 				(sender, args) => ReportException(sender, args.ExceptionObject as Exception);
 		}
 
-		private static void ReportException(object sender, Exception exception)
-		{
-			const string messageFormat = @"
-===========================================================
-ERROR, date = {0}, sender = {1},
-{2}
-";
-			const string path = "error.log";
-			try
-			{
-				var message = string.Format(messageFormat, DateTimeOffset.Now, sender, exception);
-				Debug.WriteLine(message);
-				File.AppendAllText(path, message);
-			}
-			catch (Exception ex)
-			{				
-				Debug.WriteLine(ex);
-			}
-		}
-
 		private static readonly ProductInfo productInfo = new ProductInfo();
 		private static bool _isExistDummy;
+	
 		static int Main(string[] args)
 		{
 			var options = new HashSet<string> { "--input-csv", "--threshold", "--output-xml", "--help", "--version" };
@@ -127,7 +108,7 @@ ERROR, date = {0}, sender = {1},
 
 		private static void ShowVersion()
 		{
-			Console.WriteLine(@" 
+			const string messageFormat = @" 
 {0}
 Version: {1}
 Project Home: https://github.com/hidari/UstdCsv2Ju
@@ -137,7 +118,14 @@ Project Home: https://github.com/hidari/UstdCsv2Ju
 
 Libraries:
 {3}
-", productInfo.Title, productInfo.VersionString, productInfo.Copyright, GetExternalLibraries());
+";
+			Console.WriteLine(
+				messageFormat, 
+				productInfo.Title, 
+				productInfo.VersionString, 
+				productInfo.Copyright, 
+				GetExternalLibraries()
+			);
 		}
 
 		private static string GetExternalLibraries()
@@ -171,6 +159,26 @@ UstdCsv2Ju.exe --version
 
   Show message about UstdCsv2Ju.
 ");
+		}
+
+		private static void ReportException(object sender, Exception exception)
+		{
+			const string messageFormat = @"
+===========================================================
+ERROR, date = {0}, sender = {1},
+{2}
+";
+			const string path = "error.log";
+			try
+			{
+				var message = string.Format(messageFormat, DateTimeOffset.Now, sender, exception);
+				Debug.WriteLine(message);
+				File.AppendAllText(path, message);
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex);
+			}
 		}
 	}
 }
