@@ -49,6 +49,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UstdCsv2Ju\UstdCsv2Ju.csproj">
+      <Project>{DD059484-89DF-44A4-969F-3BC472BB3C3F}</Project>
+      <Name>UstdCsv2Ju</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
