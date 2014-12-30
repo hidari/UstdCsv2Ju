@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using CsvHelper;
 using CsvHelper.Configuration;
-using CsvHelper.TypeConversion;
 
 namespace Hidari0415.UstdCsv2Ju
 {
@@ -18,24 +16,16 @@ namespace Hidari0415.UstdCsv2Ju
 		/// <returns>All data that read from CSV file</returns>
 		public static List<MetricRecord> ReadMetricRecords(string path)
 		{
-			List<MetricRecord> records = null;
+			List<MetricRecord> records;
 
 			using (var reader = new CsvReader(new StreamReader(path, Encoding.Default)))
 			{
 				reader.Configuration.RegisterClassMap<MetricRecordMap>();
 
-				try
-				{
-					records = reader.GetRecords<MetricRecord>().ToList();
-				}
-				catch (CsvTypeConverterException ex)
-				{
-					Console.WriteLine("Failed to read CSV file because of :");
-					Console.WriteLine(ex.Message);
-				}
+				records = reader.GetRecords<MetricRecord>().ToList();
 			}
 
-			return records ?? new List<MetricRecord>() ;
+			return records;
 		}
 	}
 
