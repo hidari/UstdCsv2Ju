@@ -43,9 +43,7 @@ namespace Hidari0415.UstdCsv2Ju
 			}
 
 			// Are Required arguments contained?
-			if (!argsDict.ContainsKey("--input-csv") ||
-				!argsDict.ContainsKey("--threshold") || 
-				!argsDict.ContainsKey("--output-xml"))
+			if (!IsContainsRequiredArgs(argsDict))
 			{
 				ShowHelp();
 				return 0;
@@ -86,6 +84,13 @@ namespace Hidari0415.UstdCsv2Ju
 			}
 
 			return 0;
+		}
+
+		private static bool IsContainsRequiredArgs(Dictionary<string, string> argsDictionary )
+		{
+			return argsDictionary.ContainsKey("--input-csv") 
+				&& argsDictionary.ContainsKey("--threshold") 
+				&& argsDictionary.ContainsKey("--output-xml");
 		}
 
 		private static string CreateTemporaryFile(string path)
