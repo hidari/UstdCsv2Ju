@@ -1,6 +1,6 @@
 ﻿namespace Hidari0415.UstdCsv2Ju
 {
-	internal class JUnitStyleTestCase
+	public class JUnitStyleTestCase
 	{
 		public JUnitStyleTestCase():this(string.Empty, string.Empty, string.Empty)
 		{
@@ -12,6 +12,8 @@
 			ClassName = className;
 			Name = name;
 			Time = time;
+			IsFailed = false;
+			FailureElement = new JUnitStyleFailureElement();
 		}
 
 		public string ClassName { get; set; }
