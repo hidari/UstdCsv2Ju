@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChainingAssertion.NUnit.cs" />
+    <Compile Include="JUnitStyleFailureElementTests.cs" />
     <Compile Include="ProductInfoTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,6 +1,6 @@
 ﻿namespace Hidari0415.UstdCsv2Ju
 {
-	internal class JUnitStyleFailureElement
+	public class JUnitStyleFailureElement
 	{
 		public JUnitStyleFailureElement()
 			: this(string.Empty, string.Empty)
