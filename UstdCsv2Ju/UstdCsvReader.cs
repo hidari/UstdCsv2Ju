@@ -7,7 +7,7 @@ using CsvHelper.Configuration;
 
 namespace Hidari0415.UstdCsv2Ju
 {
-	internal static class UstdCsvReader
+	public static class UstdCsvReader
 	{
 		/// <summary>
 		/// Read Metric data from CSV file.
