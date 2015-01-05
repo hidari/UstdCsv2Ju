@@ -13,8 +13,8 @@ namespace Hidari0415.UstdCsv2Ju.Tests
 			var actual = UstdCsvReader.ReadMetricRecords("Ustd.csv");
 			var expect = new List<MetricRecord>
 			{
-				new MetricRecord() {File = "src\\module\\hoge.cpp", Kind = "Public Function", Name = "DoSomething(int, int)", Value = 19},
-				new MetricRecord() {File = "src\\module\\fuga.cpp", Kind = "Private Function", Name = "GetSomething(LPCTSTR)", Value = 45}
+				new MetricRecord {File = "src\\module\\hoge.cpp", Kind = "Public Function", Name = "DoSomething(int, int)", Value = 19},
+				new MetricRecord {File = "src\\module\\fuga.cpp", Kind = "Private Function", Name = "GetSomething(LPCTSTR)", Value = 45}
 			};
 
 			actual.IsStructuralEqual(expect);
