@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using NUnit.Framework;
+using CsvHelper.TypeConversion;
 
 namespace Hidari0415.UstdCsv2Ju.Tests
 {
@@ -18,6 +19,15 @@ namespace Hidari0415.UstdCsv2Ju.Tests
 			};
 
 			actual.IsStructuralEqual(expect);
+			
+		}
+
+		[Test]
+		public void ReadingIncorrectCsvThrowsException()
+		{
+			File.WriteAllText("Ustd.csv", UstdCsv.IncorrectCsv);
+			Assert.Throws(typeof(CsvTypeConverterException), () => UstdCsvReader.ReadMetricRecords("Ustd.csv"));
+			
 		}
 	}
 }
