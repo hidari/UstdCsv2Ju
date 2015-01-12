@@ -52,6 +52,7 @@
     <Compile Include="MetricRecordTests.cs" />
     <Compile Include="ProductInfoTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResultXmlWriterTests.cs" />
     <Compile Include="UstdCsv.cs" />
     <Compile Include="UstdCsvReaderTests.cs" />
   </ItemGroup>

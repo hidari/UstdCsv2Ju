@@ -3,7 +3,7 @@ using System.Xml;
 
 namespace Hidari0415.UstdCsv2Ju
 {
-	internal class ResultXmlWriter
+	public class ResultXmlWriter
 	{
 		public string InputCsv { get; private set; }
 		public int Threshold { get; private set; }
