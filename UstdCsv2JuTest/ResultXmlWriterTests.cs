@@ -31,7 +31,7 @@ namespace Hidari0415.UstdCsv2Ju.Tests
 			var expected = new JUnitStyleTestCase
 			{
 				ClassName = "src.module.hoge_cpp",
-				FailureElement = new JUnitStyleFailureElement("OverThresholdException", "Threshold: 20\r\nActual:100\r\nOver: 80"),
+				FailureElement = new JUnitStyleFailureElement("OverThresholdException", "Threshold: 20\r\nActual: 100\r\nOver: 80"),
 				IsFailed = true,
 				Name = "DoSomething(int, int)",
 				Time = "0.00"
@@ -73,7 +73,7 @@ namespace Hidari0415.UstdCsv2Ju.Tests
 			resultXmlWriter.WriteResultFile();
 
 			var actual = File.ReadAllText("Ustd.xml");
-			const string expect = "<testsuite>\r\n  <testcase classname=\"src.module.hoge_cpp\" name=\"DoSomething(int, int)\" time=\"0.00\" />\r\n  <testcase classname=\"src.module.fuga_cpp\" name=\"GetSomething(LPCTSTR)\" time=\"0.00\">\r\n    <failure type=\"OverThresholdException\" message=\"Threshold: 20&#xD;&#xA;Actual:45&#xD;&#xA;Over: 25\" />\r\n  </testcase>\r\n</testsuite>";
+			const string expect = "<testsuite>\r\n  <testcase classname=\"src.module.hoge_cpp\" name=\"DoSomething(int, int)\" time=\"0.00\" />\r\n  <testcase classname=\"src.module.fuga_cpp\" name=\"GetSomething(LPCTSTR)\" time=\"0.00\">\r\n    <failure type=\"OverThresholdException\" message=\"Threshold: 20&#xD;&#xA;Actual: 45&#xD;&#xA;Over: 25\" />\r\n  </testcase>\r\n</testsuite>";
 			actual.Is(expect);
 		}
 	}

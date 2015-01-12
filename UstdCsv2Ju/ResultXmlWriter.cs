@@ -82,7 +82,7 @@ namespace Hidari0415.UstdCsv2Ju
 		private string CreateErrorDetailMessage(MetricRecord metricRecord)
 		{
 			const string messageFormat = @"Threshold: {0}
-Actual:{1}
+Actual: {1}
 Over: {2}";
 
 			return string.Format(
