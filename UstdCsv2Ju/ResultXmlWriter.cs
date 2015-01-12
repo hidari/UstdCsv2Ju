@@ -16,7 +16,7 @@ namespace Hidari0415.UstdCsv2Ju
 			OutputXml = outputXml;
 		}
 
-		internal void WriteResultFile()
+		public void WriteResultFile()
 		{
 			// CSVファイルを読み込んでレコードをMetricRecordのリストとして保持する
 			var records = UstdCsvReader.ReadMetricRecords(InputCsv);
@@ -52,7 +52,7 @@ namespace Hidari0415.UstdCsv2Ju
 			xmlDocument.Save(OutputXml);
 		}
 
-		private JUnitStyleTestCase CreateTestCase(MetricRecord metricRecord)
+		public JUnitStyleTestCase CreateTestCase(MetricRecord metricRecord)
 		{
 			var testCase = new JUnitStyleTestCase()
 			{
